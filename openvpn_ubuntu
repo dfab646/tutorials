@@ -1,0 +1,43 @@
+	apt ins easy-rsa
+	apt-get install openvpn
+
+	
+	cd ~/openvpn-ca
+	[export KEY_NAME="server"]		// add this line to vars file
+	source vars
+	./clean-all 				//remove old keys from keys/
+	./build-ca  				// build ca certificate
+	./build-key-server [server] 		// build server certificate and key
+	./build-dh 				// generate diffie-hellman key
+	openvpn --genkey --secret keys/tiv.key  // HMAC Signature to ensure TLS integrity
+	
+	/// Generate Client Certificates
+		cd ~/openvpn-ca
+		./build-key [client-name]
+	
+	/// Set up keys and certificates in /etc/openvpn
+		cd ~/openvpn-ca/keys
+		sudo cp ca.crt server.crt server.key tiv.key dh2048.pem /etc/openvpn
+	/// Copy example config file
+		gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz | sudo tee /etc/openvpn/server.conf
+	/// Edit server.conf 
+		tls-auth tiv.key 0 # This file is secret
+		key-direction 0
+	/// Uncomment the AES-128-CBC line & add auth SHA256
+		cipher AES-128-CBC
+		auth SHA256
+	/// setup nobody user 	
+		user nobody
+		group nogroup
+	/// route all traffic thru VPN.
+		push "redirect-gateway def1 bypass-dhcp"
+	/// uncomment dns servers
+		push "dhcp-option DNS 208.67.222.222"
+		push "dhcp-option DNS 208.67.220.220"
+	/// Port and protocol used.		
+		port 443
+		proto tcp
+		;proto udp
+	/// Specify server keys and ca's
+		cert server.crt
+		key server.key
