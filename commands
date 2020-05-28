@@ -1,2 +1,26 @@
+### DJANGO ###
+
+django-admin startproject [projectname] 
+python3 manage.py startapp [appname]
+
+### Python ###
+
 tmux new -s mysession
 
+
+### CONDA ###
+conda info
+conda env list
+conda create --name project_name 
+conda create --name project_name python=3.7
+
+conda activate
+conda list # installed packages
+conda list --revision # versions
+conda install --revision 1
+
+conda activate base
+conda deactivate
+conda env list
+conda env remove
+ 
