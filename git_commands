@@ -10,14 +10,8 @@ git clone username@host:/path/to/repository
 ### github
 git@github.com:dfab646/tutorials.git
 
-
-
-
-
 ### workflow
 ### Add files
-
-
 git add <filename>
 git add *
 
@@ -29,7 +23,6 @@ git commit -m "Commit message"
 git push origin master
 
 ### You can change master to whatever branch you want to push your changes to.
-
 ### Add remote server 
 git remote add origin <server>
 
@@ -42,9 +35,6 @@ git commit -m "first commit"
 git remote add origin git@github.com:dfab646/1234.git
 git push -u origin master
 
-
-
-
 ### Branching
 
 ###create a new branch named "feature_x" and switch to it using
@@ -53,82 +43,61 @@ git checkout -b feature_x
 ###switch back to master
 git checkout master
 
-
 ### delete the branch again
 git branch -d feature_x
 
 ### a branch is not available unless you push the branch to your remote repository
 git push origin <branch>
 
-### update & merge
+### UPDATE & MERGE
+###to update your local repository to the newest commit, execute "git pull" in your working dir to fetch and merge remote changes.
 
-###to update your local repository to the newest commit, execute
 git pull
-
-in your working directory to fetch and merge remote changes.
-to merge another branch into your active branch (e.g. master), use
 git merge <branch>
-in both cases git tries to auto-merge changes. Unfortunately, this is not always possible and results in conflicts. You are responsible to merge those conflicts manually by editing the files shown by git. After changing, you need to mark them as merged with
-git add <filename>
-before merging changes, you can also preview them by using
+
+# in both cases git tries to auto-merge changes. Unfortunately, this is not always possible and results in conflicts. You are responsible to merge those conflicts manually by editing the files shown by git. After changing, you need to mark them as merged with
+git add <filename> 
+
+# before merging changes, you can also preview them by using
 git diff <source_branch> <target_branch>
-tagging
 
-it's recommended to create tags for software releases. this is a known concept, which also exists in SVN. You can create a new tag named 1.0.0 by executing
+### TAGING
+### it's recommended to create tags for software releases. this is a known concept, which also exists in SVN. You can create a new tag named 1.0.0 by executing
 git tag 1.0.0 1b2e1d63ff
-the 1b2e1d63ff stands for the first 10 characters of the commit id you want to reference with your tag. You can get the commit id by looking at the...
-log
 
-in its simplest form, you can study repository history using.. git log
-You can add a lot of parameters to make the log look like what you want. To see only the commits of a certain author:
+# the 1b2e1d63ff stands for the first 10 characters of the commit id you want to reference with your tag. You can get the commit id by looking at the...
+git log
+
+### In its simplest form, you can study repository history using.. 
+git log
+
+### You can add a lot of parameters to make the log look like what you want.
+### To see only the commits of a certain author:
 git log --author=bob
-To see a very compressed log where each commit is one line:
+
+### To see a very compressed log where each commit is one line:
 git log --pretty=oneline
-Or maybe you want to see an ASCII art tree of all the branches, decorated with the names of tags and branches:
+### Or maybe you want to see an ASCII art tree of all the branches, decorated with the names of tags and branches:
 git log --graph --oneline --decorate --all
-See only which files have changed:
+### See only which files have changed:
 git log --name-status
-These are just a few of the possible parameters you can use. For more, see git log --help
+### These are just a few of the possible parameters you can use. For more, see git log --help
 replace local changes
 
-In case you did something wrong, which for sure never happens ;), you can replace local changes using the command
+### In case you did something wrong, which for sure never happens ;), you can replace local changes using the command
 git checkout -- <filename>
-this replaces the changes in your working tree with the last content in HEAD. Changes already added to the index, as well as new files, will be kept.
+### this replaces the changes in your working tree with the last content in HEAD. Changes already added to the index, as well as new files, will be kept.
 
-If you instead want to drop all your local changes and commits, fetch the latest history from the server and point your local master branch at it like this
+### If you instead want to drop all your local changes and commits, fetch the latest history from the server and point your local master branch at it like this
 git fetch origin
 git reset --hard origin/master
-useful hints
 
-built-in git GUI
+### useful hints
+#built-in git GUI
 gitk
-use colorful git output
+#use colorful git output
 git config color.ui true
-show log on just one line per commit
+#show log on just one line per commit
 git config format.pretty oneline
-use interactive adding
+#use interactive adding
 git add -i
-links & resources
-graphical clients
-
-    GitX (L) (OSX, open source)
-    Tower (OSX)
-    Source Tree (OSX & Windows, free)
-    GitHub for Mac (OSX, free)
-    GitBox (OSX, App Store)
-
-guides
-
-    Git Community Book
-    Pro Git
-    Think like a git
-    GitHub Help
-    A Visual Git Guide
-
-get help
-
-    Git User Mailing List
-    #git on irc.freenode.net
-
-comments
-
